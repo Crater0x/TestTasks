@@ -11,9 +11,6 @@ def test_token_deployment():
     deployer = accounts[0]
     initial_supply = 1000000
 
-    # Deploy the token contract
     token = Token.deploy(initial_supply, {'from': deployer})
 
-    # Verify the deployment
-    # assert token.owner() == deployer
     assert token.totalSupply() == initial_supply

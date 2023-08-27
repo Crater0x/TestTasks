@@ -1,11 +1,8 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.0;
 
-// import "../node_modules/@openzeppelin/contracts/token/ERC721/ERC721.sol";
-
 import "@openzeppelin/contracts/token/ERC721/ERC721.sol";
 import "@openzeppelin/contracts/access/Ownable.sol";
-
 
 contract Token is ERC721, Ownable {
     using Strings for uint256;
@@ -15,16 +12,15 @@ contract Token is ERC721, Ownable {
     address payable private _feeReceiver;
 
     uint public currentId;
-    string public baseTokenURI;
+    string public baseTokenURI = "https://black-legal-turkey-600.mypinata.cloud/ipfs/QmSnKuFFxDFiHuTMaoqBHCLPdnM6NFLy2PzgxqG5fN25Bj/";
 
-    constructor(uint _initSupply, string memory _baseTokenURL) ERC721("Token", "NFT") {
+    constructor(uint _initSupply) ERC721("Token", "NFT") {   
         _maxTotalSupply = _initSupply;
         _feeReceiver = payable(msg.sender);
-        baseTokenURI = _baseTokenURL;
     }
 
-        function tokenURI(uint256 tokenId) public view virtual override returns (string memory) {
-        require(_exists(tokenId), "ERC721: invalid token ID");
+    function tokenURI(uint256 tokenId) public view virtual override returns (string memory) {
+        require(_exists(tokenId), "Token: invalid token ID");
 
         string memory baseURI = _baseURI();
         return bytes(baseURI).length > 0 ? string(abi.encodePacked(baseURI, tokenId.toString(), ".json")) : "";
@@ -42,18 +38,15 @@ contract Token is ERC721, Ownable {
             require(success, "Failed to send Ether");
 
             _mint(receiver, currentId);
-            tokenURI(currentId);
             currentId++;
         }
     }
-
 
     function _baseURI() internal view virtual override returns (string memory) {
         return baseTokenURI;
     }
 
-
-    function setBaseTokenURI(string memory _baseTokenURI) public onlyOwner(){
+    function setBaseTokenURI(string memory _baseTokenURI) external {
         baseTokenURI = _baseTokenURI;
     }
 

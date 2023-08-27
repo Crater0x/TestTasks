@@ -27,7 +27,7 @@ def test_mint_max_total_supply(token):
         token.mint(3, {'from': account, 'value': '0.003 ether'})
 
     token.mint(1, {'from': accounts[1], 'value': 1e15})
-    assert token.count() == 100
+    assert token.currentId() == 100
 
     with brownie.reverts("Token: max token amount reached!"):
         token.mint(1, {'from': accounts[1], 'value': 1e15})
