@@ -1,0 +1,19 @@
+{
+    "description": "This is my firts test NFT",
+    "image": "https://ipfs.io/ipfs/Qmb8Guy7sL3i3GWKxaP62m98r8FgMQYoxnpapTmotCDzu1/bear-0078.png",
+    "name": "NFT 0078",
+    "attributes": [
+        {
+            "trait_type": "Clothes",
+            "value": "Military"
+        },
+        {
+            "trait_type": "Hair",
+            "value": "Mohawk"
+        },
+        {
+            "trait_type": "Boots",
+            "value": "Adidas"
+        }
+    ]
+}

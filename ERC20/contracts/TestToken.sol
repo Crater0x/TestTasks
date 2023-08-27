@@ -1,32 +1,28 @@
  // SPDX-License-Identifier: MIT
-     pragma solidity ^0.8.0;
+pragma solidity ^0.8.0;
      
-import "../node_modules/@openzeppelin/contracts/token/ERC20/ERC20.sol";
+import "@openzeppelin/contracts/token/ERC20/ERC20.sol";
+import "@openzeppelin/contracts/access/Ownable.sol";
 
-contract Token is ERC20 {
-    uint256 private initialSupply;
-    address public owner;
-
+contract Token is ERC20,  Ownable{
+    uint256 public maxTotalSupply;
+   
     constructor(uint256 _initSupply, uint256 _amountIn, address[] memory _to) ERC20("TestToken", "TTK") {
-        owner = msg.sender;
-        initialSupply = _initSupply;
+        maxTotalSupply = _initSupply;
         for (uint256 i = 0; i < _to.length; i++) {
-            if (totalSupply() + _amountIn <= initialSupply)
-                _mint(_to[i], _amountIn);
+            _mint(_to[i], _amountIn);
         }
         
     }
 
 
-    function mint(address to, uint256 amountIn) public {
-        require(msg.sender == owner);
-        if (totalSupply() + amountIn <= initialSupply) 
-            _mint(to, amountIn);
+    function mint(address to, uint256 amountIn) public onlyOwner() {
+        require(totalSupply() + amountIn <= maxTotalSupply, "Token: max Total supply reached!");
+        mint(to, amountIn);
     }
 
     
-    function burn(address to, uint256 amount) public {
-        require(msg.sender == owner);
+    function burn(address to, uint256 amount) public onlyOwner(){
         if (balanceOf(to) <= amount) 
             _burn(to, balanceOf(to));
         else

@@ -1,0 +1,19 @@
+{
+    "description": "This is my firts test NFT",
+    "image": "https://ipfs.io/ipfs/Qmb8Guy7sL3i3GWKxaP62m98r8FgMQYoxnpapTmotCDzu1/bear-0065.png",
+    "name": "NFT 0065",
+    "attributes": [
+        {
+            "trait_type": "Clothes",
+            "value": "Jacket"
+        },
+        {
+            "trait_type": "Hair",
+            "value": "Empty"
+        },
+        {
+            "trait_type": "Boots",
+            "value": "Nike"
+        }
+    ]
+}

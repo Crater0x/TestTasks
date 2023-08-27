@@ -1,21 +1,15 @@
 dependencies:
   - OpenZeppelin/openzeppelin-contracts@4.5.0
 
-# networks:
-#   development:
-#     host: localhost
-#     chainid: 1337  # Choose a suitable chain ID
-#     gas_limit: 10000000  # Adjust the gas limit as needed
-#     gas_price: 20000000000  # Adjust the gas price as needed
-
-# wallets:
-#   from_key: ${YOUR_MNEMONIC_PHRASE}
 
 networks:
+  default: development    
   development:
     host: localhost
     port: 8545
     network_id: "*"
+    cmd_settings:
+      accounts: 10
   sepolia:
     host:  https://eth-sepolia.g.alchemy.com/v2/QFnGnzjqT2k2WoMImyDd2vrQ6fZeUUTM
     chainid: 11155111
@@ -25,6 +19,9 @@ networks:
       - account_key_moralis
 
 dotenv: .env
+
+wallets:
+  from_key: ${PRIVATE_KEY}
 
 
 
